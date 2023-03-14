@@ -13,7 +13,7 @@ module.exports = {
         grey: "#E5E5E5",
       },
       maxWidth: {
-        128: "1200px",
+        128: "1220px",
       },
     },
     fontFamily: {

@@ -86,7 +86,7 @@ const Pagination = ({
               // className={Styles.pagination_item}
               key={i}
               //   className={selectedStyle}
-              className={`px-3 h-8 text-center my-auto mx-2  flex items-center rounded text-sm min-w-[32px] ${
+              className={`px-3 h-8 text-center my-auto mx-2  flex items-center rounded text-sm min-w-[32px] cursor-pointer ${
                 pageNumber === currentPage
                   ? "text-white bg-blue"
                   : "text-primaryText"
