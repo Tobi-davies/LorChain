@@ -11,6 +11,7 @@ import { BsFillPersonFill } from "react-icons/bs";
 import Pagination from "@/components/pagination/pagination";
 import EmptyState from "@/components/empty-state/empty-state";
 import LoadingState from "@/components/loading-state/loading-state";
+import { abbrevNum } from "../helper";
 
 export default function Home() {
   const [currentPage, setCurrentPage] = React.useState<number>(1);
@@ -61,7 +62,7 @@ export default function Home() {
     isLoading: profileLoading,
     isError: profileError,
   } = profileQuery;
-  console.log(profileData, "profileQuery");
+  // console.log(profileData, "profileQuery");
   // console.log(repoQuery?.data.data, "repoQuery");
   const {
     data: repoData,
@@ -71,17 +72,11 @@ export default function Home() {
   } = repoQuery;
   console.log(repoData);
 
-  console.log(profileQuery, repoQuery);
+  // console.log(profileQuery, repoQuery);
 
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };
-
-  // const handleChange = (e: any) => {
-  //   // 👇 Get input value
-  //   setSearchInput(e.target.value);
-  //   // console.log("kljghkjl", searchInput);
-  // };
 
   const renderView = () => {
     if (profileLoading || repoLoading) {
@@ -110,15 +105,21 @@ export default function Home() {
               <h2 className="mb-2 font-semibold text-2xl">
                 {profileData?.data?.name}
               </h2>
-              <p className="text-lg text-blue mb-7">
-                {profileData?.data?.login}
+              <p className="text-lg text-blue mb-7 cursor-pointer">
+                <a
+                  target="_blank"
+                  href={`${profileData?.data?.html_url}`}
+                  rel="noopener noreferrer"
+                >
+                  {profileData?.data?.login}
+                </a>
               </p>
 
               <div className="flex gap-4">
                 <div className="flex items-center gap-1">
                   <MdGroup fontSize={20} />
                   <span className="text-sm">
-                    {profileData?.data?.followers}65.8k followers
+                    {abbrevNum(profileData?.data?.followers)} followers
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
@@ -146,13 +147,6 @@ export default function Home() {
         >
           <div className="w-2/6">
             <div className="h-60 w-60 mb-5">
-              {/* style={{
-        backgroundImage: `url(
-        ${shared.bgPattern}
-      )`,
-        backgroundRepeat: "no-repeat",
-        backgroundPosition: "cover",
-      }} */}
               <img
                 src={profileData?.data?.avatar_url}
                 alt="profile"
@@ -163,13 +157,21 @@ export default function Home() {
             <h2 className="mb-2 font-semibold text-2xl">
               {profileData?.data?.name}
             </h2>
-            <p className="text-lg text-blue mb-7">{profileData?.data?.login}</p>
+            <p className="text-lg text-blue mb-7 cursor-pointer">
+              <a
+                target="_blank"
+                href={`${profileData?.data?.html_url}`}
+                rel="noopener noreferrer"
+              >
+                {profileData?.data?.login}
+              </a>
+            </p>
 
             <div className="flex gap-4">
               <div className="flex items-center gap-1">
                 <MdGroup fontSize={20} />
                 <span className="text-sm">
-                  {profileData?.data?.followers}65.8k followers
+                  {abbrevNum(profileData?.data?.followers)} followers
                 </span>
               </div>
               <div className="flex items-center gap-1">
@@ -192,8 +194,14 @@ export default function Home() {
                 {repoData?.data.map((item: any, i: number) => {
                   return (
                     <div key={i} className="mb-5 py-5 px-6 bg-white">
-                      <h4 className="mb-1.5 text-blue text-xl font-medium">
-                        {item.name}
+                      <h4 className="mb-1.5 text-blue text-xl font-medium cursor-pointer">
+                        <a
+                          target="_blank"
+                          href={`${item.html_url}`}
+                          rel="noopener noreferrer"
+                        >
+                          {item.name}
+                        </a>
                       </h4>
                       <p className="text-base truncate">
                         {item.description ? item.description : "N/A"}
@@ -230,12 +238,18 @@ export default function Home() {
       <div className="bg-blue pt-3 pb-3">
         <div className="max-w-128 px-5 mx-auto text-2xl flex items-center gap-5">
           <ImGithub color="#fff" fontSize={30} />
-          <input
-            type="text"
-            className="w-[400px] bg-white rounded-md outline-none border-none pl-3 pt-1.5 pb-1.5 text-sm"
-            placeholder="Enter GitHub username"
-            onKeyDown={handleSearch}
-          />
+          <div className="w-[400px] relative">
+            <input
+              type="text"
+              className="w-full bg-white rounded-md outline-none border-none pl-3 pt-1.5 pb-1.5 text-sm pl-12"
+              placeholder="Enter GitHub username"
+              onKeyDown={handleSearch}
+            />
+            <FiSearch
+              className="text-primaryText absolute top-2.5 left-4"
+              fontSize={18}
+            />
+          </div>
         </div>
       </div>
 
@@ -259,12 +273,3 @@ export default function Home() {
     </>
   );
 }
-
-// export async function getServerSideProps() {
-//   const res = await fetch(`http://localhost:3000/api`);
-//   const data = await res.json();
-
-//   console.log(data);
-
-//   return { props: { data } };
-// }
