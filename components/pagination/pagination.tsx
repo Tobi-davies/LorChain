@@ -48,7 +48,7 @@ const Pagination = ({
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [onPageChange]);
+  }, [onPageChange, currentPage, lastPage, pageSize, totalCount]);
 
   return (
     <div className="flex px-5">
