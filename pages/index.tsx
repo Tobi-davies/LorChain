@@ -242,7 +242,7 @@ export default function Home() {
           <div className="w-[400px] relative">
             <input
               type="text"
-              className="w-full bg-white rounded-md outline-none border-none pl-3 pt-1.5 pb-1.5 text-sm pl-12"
+              className="w-full bg-white rounded-md outline-none border-none pt-1.5 pb-1.5 text-sm pl-12"
               placeholder="Enter GitHub username"
               onKeyDown={handleSearch}
             />
