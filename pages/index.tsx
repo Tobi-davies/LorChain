@@ -20,6 +20,7 @@ export default function Home() {
   const handleSearch = (e: any) => {
     if (e.key === "Enter") {
       setUsername(e.target.value);
+      setCurrentPage(1);
     }
   };
 
