@@ -46,8 +46,6 @@ const Pagination = ({
       let firstNum = pageSize * (currentPage - 1) + 1;
       setViewRange(`${firstNum} - ${currentPage * pageSize}`);
     }
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onPageChange, currentPage, lastPage, pageSize, totalCount]);
 
   return (
@@ -67,7 +65,11 @@ const Pagination = ({
         </li>
         {paginationRange!.map((pageNumber, i) => {
           if (pageNumber === DOTS) {
-            return <li className="my-auto mx-1">&#8230;</li>;
+            return (
+              <li className="my-auto mx-1" key={i}>
+                &#8230;
+              </li>
+            );
           }
 
           return (
