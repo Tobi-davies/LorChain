@@ -46,6 +46,8 @@ const Pagination = ({
       let firstNum = pageSize * (currentPage - 1) + 1;
       setViewRange(`${firstNum} - ${currentPage * pageSize}`);
     }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [onPageChange]);
 
   return (
